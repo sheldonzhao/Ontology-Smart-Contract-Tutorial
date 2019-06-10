@@ -1,7 +1,6 @@
 <h1 align="center">本体智能合约语法专辑（3）- Blockchain & Block API</h1>
-<p align="center" class="version">Version 0.1</p>
 
-### 1.导语
+## 1.导语
 
 在上两期中，我们介绍了什么是本体智能合约和合约开发工具SmartX。这一期将正式开始智能合约语法部分。 本体的智能合约API分为7个模块。Blockchain & Block API, Runtime API, Storage API, Native API, Upgrade API, Execution Engine API, Static & Dynamic Call API. 本期我们将介绍 Blockchain & Block API。Blockchain API支持基本的区块链查询操作例如获取当前块高，Block API支持基本的区块查询操作例如查询指定区块交易数。下文将一一提供调用方法，所有语法部分提供中英文视频。
 
@@ -220,5 +219,9 @@ block=GetBlock(1408)
 tx=GetTransactionByIndex(block,0) # index starts from 0.
 return tx
 ```
+
+##4.后记
+
+Blockchain & Block API 在智能合约中起到查询区块链数据和区块数据的作用，是智能合约最不可缺少的一部分。下一期我们将讨论如何使用 Storage API。 
 
 
