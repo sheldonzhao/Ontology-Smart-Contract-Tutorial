@@ -29,40 +29,40 @@ from ontology.interop.System.Storage import GetContext, Get, Put, Delete, GetRea
 from ontology.interop.System.Runtime import Notify
 
 def Main(operation,args):
-if operation == 'get_sc':
-return get_sc()
-if operation == 'get_read_only_sc':
-return get_read_only_sc()
-if operation == 'get_data':
-key=args[0]
-return get_data(key)
-if operation == 'save_data':
-key=args[0]
-value=args[1]
-return save_data(key, value)
-if operation == 'delete_data':
-key=args[0]
-return delete_data(key)
-return False
+    if operation == 'get_sc':
+        return get_sc()
+    if operation == 'get_read_only_sc':
+        return get_read_only_sc()
+    if operation == 'get_data':
+        key=args[0]
+        return get_data(key)
+    if operation == 'save_data':
+        key=args[0]
+        value=args[1]
+        return save_data(key, value)
+    if operation == 'delete_data':
+        key=args[0]
+        return delete_data(key)
+    return False
 
 def get_sc():
-return GetContext()
-
+    return GetContext()
+    
 def get_read_only_sc():
-return GetReadOnlyContext()
+    return GetReadOnlyContext()
 
 def get_data(key):
-sc=GetContext() 
-data=Get(sc,key)
-return data
-
+    sc=GetContext() 
+    data=Get(sc,key)
+    return data
+    
 def save_data(key, value):
-sc=GetContext() 
-Put(sc,key,value)
-
+    sc=GetContext() 
+    Put(sc,key,value)
+    
 def delete_data(key):
-sc=GetContext() 
-Delete(sc,key)
+    sc=GetContext() 
+    Delete(sc,key)
 ```
 
 ## 4.后记
