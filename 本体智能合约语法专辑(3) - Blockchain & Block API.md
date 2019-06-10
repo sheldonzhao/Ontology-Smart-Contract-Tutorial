@@ -224,4 +224,14 @@ return tx
 
 Blockchain & Block API 在智能合约中起到查询区块链数据和区块数据的作用，是智能合约最不可缺少的一部分。下一期我们将讨论如何使用 Storage API，它实现了对区块链的增删改查，敬请期待。 
 
+## 5.问题
+
+将16进制格式的交易哈希“c938e421d7e6fc52005763b1a9ef8286697216c21b5d070a5e77c392ccdd5a88”转换成bytearray格式后得到：
+1. 885addcc92c3775e0a075d1bc21672698682efa9b163570052fce6d721e438c9
+2. 0x88,0x5a,0xdd,0xcc,0x92,0xc3,0x77,0x5e,0x0a,0x07,0x5d,0x1b,0xc2,0x16,0x72,0x69,0x86,0x82,0xef,0xa9,0xb1,0x63,0x57,0x00,0x52,0xfc,0xe6,0xd7,0x21,0xe4,0x38,0xc9
+3. \xc9\x38\xe4\x21\xd7\xe6\xfc\x52\x00\x57\x63\xb1\xa9\xef\x82\x86\x69\x72\x16\xc2\x1b\x5d\x07\x0a\x5e\x77\xc3\x92\xcc\xdd\x5a\x88
+4. \x88\x5a\xdd\xcc\x92\xc3\x77\x5e\x0a\x07\x5d\x1b\xc2\x16\x72\x69\x86\x82\xef\xa9\xb1\x63\x57\x00\x52\xfc\xe6\xd7\x21\xe4\x38\xc9
+
+答案是D
+
 
