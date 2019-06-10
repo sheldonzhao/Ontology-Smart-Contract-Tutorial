@@ -220,7 +220,7 @@ tx=GetTransactionByIndex(block,0) # index starts from 0.
 return tx
 ```
 
-##4.后记
+## 4.后记
 
 Blockchain & Block API 在智能合约中起到查询区块链数据和区块数据的作用，是智能合约最不可缺少的一部分。下一期我们将讨论如何使用 Storage API，它实现了对区块链的增删改查，敬请期待。 
 
