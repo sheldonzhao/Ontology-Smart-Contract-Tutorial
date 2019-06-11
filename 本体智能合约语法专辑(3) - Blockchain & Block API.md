@@ -23,19 +23,19 @@ from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, G
 #### GetHeight 获取当前最新块高
 
 ```
-from boa.interop.System.Runtime import Notify
-from boa.interop.System.Blockchain import GetHeight
+from ontology.interop.System.Runtime import Notify
+from ontology.interop.System.Blockchain import GetHeight
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-height=GetHeight()
-Notify(height)
-return height
+    height=GetHeight()
+    Notify(height)
+    return height
 ```
 
 #### GetHeader 通过块高获取区块头
@@ -45,16 +45,16 @@ from ontology.interop.System.Runtime import Notify
 from ontology.interop.System.Blockchain import GetHeader
 
 def Main(operation, args):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block_height=10
-header=GetHeader(block_height)
-Notify(header)
-return header
+    block_height=10
+    header=GetHeader(block_height)
+    Notify(header)
+    return header
 ```
 
 
@@ -69,16 +69,16 @@ return header
 from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, GetTransactionHeight, GetContract, GetTransactionByHash
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-# tx_hash="9f270aa3a4c13c46891ff0e1a2bdb3ea0525669d414994aadf2606734d0c89c1"
-tx_hash=bytearray(b"\xc1\x89\x0c\x4d\x73\x06\x26\xdf\xaa\x94\x49\x41\x9d\x66\x25\x05\xea\xb3\xbd\xa2\xe1\xf0\x1f\x89\x46\x3c\xc1\xa4\xa3\x0a\x27\x9f")
-tx=GetTransactionByHash(tx_hash)
-return tx
+    # tx_hash="9f270aa3a4c13c46891ff0e1a2bdb3ea0525669d414994aadf2606734d0c89c1"
+    tx_hash=bytearray(b"\xc1\x89\x0c\x4d\x73\x06\x26\xdf\xaa\x94\x49\x41\x9d\x66\x25\x05\xea\xb3\xbd\xa2\xe1\xf0\x1f\x89\x46\x3c\xc1\xa4\xa3\x0a\x27\x9f")
+    tx=GetTransactionByHash(tx_hash)
+    return tx
 ```
 
 #### GetTransactionHeight 通过交易哈希获取交易高度
@@ -87,16 +87,16 @@ return tx
 from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, GetTransactionHeight, GetContract, GetTransactionByHash
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-# tx_hash="9f270aa3a4c13c46891ff0e1a2bdb3ea0525669d414994aadf2606734d0c89c1"
-tx_hash=bytearray(b"\xc1\x89\x0c\x4d\x73\x06\x26\xdf\xaa\x94\x49\x41\x9d\x66\x25\x05\xea\xb3\xbd\xa2\xe1\xf0\x1f\x89\x46\x3c\xc1\xa4\xa3\x0a\x27\x9f")
-height=GetTransactionHeight(tx_hash)
-return height
+    # tx_hash="9f270aa3a4c13c46891ff0e1a2bdb3ea0525669d414994aadf2606734d0c89c1"
+    tx_hash=bytearray(b"\xc1\x89\x0c\x4d\x73\x06\x26\xdf\xaa\x94\x49\x41\x9d\x66\x25\x05\xea\xb3\xbd\xa2\xe1\xf0\x1f\x89\x46\x3c\xc1\xa4\xa3\x0a\x27\x9f")
+    height=GetTransactionHeight(tx_hash)
+    return height
 ```
 
 #### GetContract 通过合约哈希获取合约
@@ -107,16 +107,16 @@ return height
 from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, GetTransactionHeight, GetContract, GetTransactionByHash
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-# contract_hash="d81a75a5ff9b95effa91239ff0bb3232219698fa"
-contract_hash=bytearray(b"\xfa\x98\x96\x21\x32\x32\xbb\xf0\x9f\x23\x91\xfa\xef\x95\x9b\xff\xa5\x75\x1a\xd8")
-contract=GetContract(contract_hash)
-return contract
+    # contract_hash="d81a75a5ff9b95effa91239ff0bb3232219698fa"
+    contract_hash=bytearray(b"\xfa\x98\x96\x21\x32\x32\xbb\xf0\x9f\x23\x91\xfa\xef\x95\x9b\xff\xa5\x75\x1a\xd8")
+    contract=GetContract(contract_hash)
+    return contract
 ```
 
 #### GetBlock 
@@ -129,14 +129,14 @@ return contract
 from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, GetTransactionHeight, GetContract, GetTransactionByHash
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block=GetBlock(1408)
-return block
+    block=GetBlock(1408)
+    return block
 ```
 
 2. Get block by block hash 通过区块哈希获取区块
@@ -146,14 +146,14 @@ return block
 from ontology.interop.System.Blockchain import GetHeight, GetHeader, GetBlock, GetTransactionHeight, GetContract, GetTransactionByHash
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block_hash=bytearray(b'\x16\xe0\xc5\x40\x82\x79\x77\x30\x44\xea\x66\xc8\xc4\x5d\x17\xf7\x17\x73\x92\x33\x6d\x54\xe3\x48\x46\x0b\xc3\x2f\xe2\x15\x03\xe4')
-block=GetBlock(block_hash)
+    block_hash=bytearray(b'\x16\xe0\xc5\x40\x82\x79\x77\x30\x44\xea\x66\xc8\xc4\x5d\x17\xf7\x17\x73\x92\x33\x6d\x54\xe3\x48\x46\x0b\xc3\x2f\xe2\x15\x03\xe4')
+    block=GetBlock(block_hash)
 ```
 
 ## 3. Block API 使用方法
@@ -173,15 +173,15 @@ from ontology.interop.System.Blockchain import GetBlock
 from ontology.interop.System.Block import GetTransactionCount
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block=GetBlock(1408)
-count=GetTransactionCount(block)
-return count
+    block=GetBlock(1408)
+    count=GetTransactionCount(block)
+    return count
 ```
 
 #### GetTransactions 获取指定区块的所有交易
@@ -191,15 +191,15 @@ from ontology.interop.System.Blockchain import GetBlock
 from ontology.interop.System.Block import GetTransactionCount
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block=GetBlock(1408)
-txs=GetTransactions(block)
-return txs
+    block=GetBlock(1408)
+    txs=GetTransactions(block)
+    return txs
 ```
 
 #### GetTransactionByIndex 获取指定区块的指定交易
@@ -209,15 +209,15 @@ from ontology.interop.System.Blockchain import GetBlock
 from ontology.interop.System.Block import GetTransactionByIndex
 
 def Main(operation):
-if operation == 'demo':
-return demo()
-return False
+    if operation == 'demo':
+        return demo()
+    return False
 
 
 def demo():
-block=GetBlock(1408)
-tx=GetTransactionByIndex(block,0) # index starts from 0.
-return tx
+    block=GetBlock(1408)
+    tx=GetTransactionByIndex(block,0) # index starts from 0.
+    return tx
 ```
 
 ## 4.后记
