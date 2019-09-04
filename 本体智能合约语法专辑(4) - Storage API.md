@@ -1,8 +1,8 @@
-<h1 align="center">本体智能合约语法专辑(4) - Storage API</h1>
+<h1 align="center">本体技术视点 | Python智能合约开发学起来！</h1>
 
 ## 1. 导语
 
-上一期我们正式开始了本体智能合约语法部分，讲述了Blockchain & Block API 的用法。本期我们讨论如何使用Storage API （存储 API）。Storage API 共有5个相关的 API，实现了对区块链的增删改查。具体用法如下：
+上一期我们正式开始了本体智能合约语法部分，讲述了[Blockchain & Block API](https://mp.weixin.qq.com/s/t1sX3aDi5WVTthnc4sMHkQ) 的用法。本期我们讨论如何使用Storage API （存储 API）。Storage API 共有5个相关的 API，实现了对区块链的增删改查。具体用法如下：
 
 | API 名称                                     | 返回值            | 描述                              |
 | ---------------------------------------- | -------------- | -------------------------------- |
@@ -12,17 +12,15 @@
 | Storage.Put(StorageContext, key, value) | void       |存储数据，key - 当前需要存储数据的 key 值，value - 当前需要存储数据的 value 值|
 | Storage.Delete(StorageContext, key)   | void           | 根据key值删除数据  |
 
-所有语法部分提供中英文视频。
-
 中文视频地址：https://v.qq.com/x/page/g0827bvdnc2.html
 
-英文视频地址：https://drive.google.com/open?id=1Uk3-n_pttija8J5lcrBCNbUEZkGpZaQQ
+在这之前，小伙伴们可以在本体智能合约开发工具 SmartX 中新建一个合约，跟着我们进行操作。
 
 ## 2. Storage API 使用方法
 
 ### 2.1 GetContext & GetReadOnlyContext
 
-GetContext & GetReadOnlyContext获取当前智能合约的运行的上下文环境，一般情况下为当前智能合约hash的反序。如图，返回值是右上角显示的合约哈希的反序。
+GetContext & GetReadOnlyContext获取当前智能合约运行的上下文环境，返回值为当前智能合约hash的反序。如图，返回值是右上角显示的合约哈希的反序。
 
 ![1](https://upload-images.jianshu.io/upload_images/150344-8c4ab81273a487f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -69,23 +67,23 @@ def Main(operation,args):
     return False
 
 def get_sc():
-    return GetContext()
+return GetContext() # 获取智能合约句柄
     
 def get_read_only_sc():
-    return GetReadOnlyContext()
+return GetReadOnlyContext() # 获取智能合约只读句柄
 
 def get_data(key):
     sc=GetContext() 
-    data=Get(sc,key)
+    data=Get(sc,key) #查询数据
     return data
     
 def save_data(key, value):
     sc=GetContext() 
-    Put(sc,key,value)
+    Put(sc,key,value) # 新增，修改数据
     
 def delete_data(key):
     sc=GetContext() 
-    Delete(sc,key)
+    Delete(sc,key) # 删除数据
 ```
 
 ## 4.后记
