@@ -146,6 +146,5 @@ C. String
 D. Integer
 E. Byte array
 
-答案：A，B。经过Serialize API后，会节省List 和 Map存入的数据所使用的空间。
 
 
