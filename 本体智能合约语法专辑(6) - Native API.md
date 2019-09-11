@@ -9,6 +9,7 @@
 | Invoke                 | byte[] |  调用原生合约    |
 
 同时，使用invoke函数需要state函数辅助来封装参数，用法如下:
+
 | API                          | 返回值  |描述                                       |
 | ---------------------------- | ---- | ---------------------------------------- |
 | state | string |      封装转账参数             |
@@ -103,7 +104,7 @@ def transfer(from_acct, to_acct, ont_amount, ong_amount):
 5. invoke调用ONT token原生合约转账，参数分别为版本号，合约地址，调用的合约方法，state封装的转账相关参数
 6. 通过返回res判断转账是否成功，b'\x01'为成功，成功输出“transfer succeed”。
 
-### smartx实践
+## 3. smartx实践
 
 1. 编译合约
 ![compile](https://upload-images.jianshu.io/upload_images/150344-73b29d22dc20bd99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -122,7 +123,7 @@ def transfer(from_acct, to_acct, ont_amount, ong_amount):
 ![Screen Shot 2019-09-11 at 5.16.06 PM.png](https://upload-images.jianshu.io/upload_images/150344-e850cfa96ed8b2d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-## 5. 本期问答
+## 4. 本期问答
 
 合约转账时，若想转2个ONT和3.12个ONG，转账数量参数分别为：
 A. 2，3120000000
