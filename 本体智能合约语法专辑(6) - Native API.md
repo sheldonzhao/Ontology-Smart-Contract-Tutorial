@@ -1,55 +1,134 @@
-# How to install and use ONT ?
+<h1 align="center">本体智能合约语法专辑(6) - Native API</h1>
 
-**1. Ensure you can use the Ledger ONT Wallet**
+## 1. 导语
 
-The [Ledger Nano S](https://www.ledgerwallet.com/products/ledger-nano-s) manages ONT and ONG tokens. It works on Windows (7+), Mac (10.8+), Linux or Chrome OS. It requires Google Chrome or Chromium, and one USB port to plug your Ledger Nano S. Note that it doesn't work on Android and iOS.
+上一期我们介绍了合约执行API，本期我们讨论如何通过Native API来进行本体原生合约调用。原生合约调用最典型的功能就是合约转账，也是整个智能合约最核心的部分，本期我们就来尝试一下合约转账。 Native API 只有1个API。用法如下：
 
-If you have a Nano S, it must be [updated to 1.3.1 firmware at least.](https://support.ledgerwallet.com/hc/en-us/articles/115005165409-How-can-I-update-my-Nano-S-)
+| API                          | 返回值  |描述                                       |
+| ---------------------------- | ---- | ---------------------------------------- |
+| Invoke                 | byte[] |  调用原生合约    |
 
-![Screen Shot 2018-06-20 at 3.14.55 PM.png](https://upload-images.jianshu.io/upload_images/150344-27a5d7fb9d561131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+同时，使用invoke函数需要state函数辅助来封装参数，用法如下:
+| API                          | 返回值  |描述                                       |
+| ---------------------------- | ---- | ---------------------------------------- |
+| state | string |      封装转账参数             |
 
-**2. Install the ONT application on your device via the [Ledger Manager](https://www.ledgerwallet.com/apps/manager)**
-*   Launch the [Ledger Manager (click to see how to install and use it if you don't have it installed yet)](https://support.ledgerwallet.com/hc/en-us/articles/115005173209)
-* Connect your Nano S, enter your PIN, and stay on the dashboard.
-* Click on the green bottom arrow icon near the ONT logo
-* Confirm the installation if required on your device
-* Quit the Ledger Manager
-* If you read "Unable to install application" error message it can be displayed for several issues described [here](https://support.ledgerwallet.com/hc/en-us/articles/115005171425-Unable-to-install-application).
-
-![WechatIMG107.jpeg](https://upload-images.jianshu.io/upload_images/150344-1d336f0e3789c8fd.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+下面我们具体讲述一下这两个 API 的使用方法。在这之前，小伙伴们可以在本体智能合约开发工具 SmartX 中新建一个合约，跟着我们进行操作。同样，在文章最后我们将给出这次讲解的所有源代码以及视频讲解。
+所有语法部分提供中英文视频。中文视频地址：[https://v.qq.com/x/page/r0830erkp8b.html](https://v.qq.com/x/page/r0830erkp8b.html)
 
 
-**3. Open your ONT application**
-* Open the ONT application on your Ledger device, the screen should show "Wake Up, ONT...".
-* You can't interact with this app without a ONT client wallet.
+## 2. Native API 使用方法
 
-![WechatIMG106.jpeg](https://upload-images.jianshu.io/upload_images/150344-bc91c3f06b4e89d1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+### 引用 
+
+```
+from ontology.interop.Ontology.Native import Invoke
+from ontology.builtins import state
+```
+
+### 本体原生合约列表
+
+以下是可以使用Native API调用的原生合约列表。在合约中，将合约地址转成bytearray形式传入Invoke即可。例如：
+```
+contract_address_ONT = bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01')
+param = state(from_acct, to_acct, ont_amount) # 参数为转出地址，转入地址， 转账金额
+res = Invoke(1, contract_address_ONT, 'transfer', [param])
+```
+
+|合约名称 | 合约地址 | 
+---|---|
+|ONT Token 合约 | 0000000000000000000000000000000000000001| 
+|ONG Token 合约 | 0000000000000000000000000000000000000002 | 
+|ONT ID 合约 | 0000000000000000000000000000000000000003 | 
+|Global Params | 0000000000000000000000000000000000000004 | 
+|Oracle | 0000000000000000000000000000000000000005 | 
+|Authorization Manager(Auth) | 0000000000000000000000000000000000000006 | 
+|Governance | 0000000000000000000000000000000000000007 | 
+|DDXF(Decentralized Exchange) | 0000000000000000000000000000000000000008 |
+
+### 转账合约代码
+
+```
+from ontology.interop.System.Runtime import Notify, CheckWitness
+from ontology.interop.Ontology.Runtime import Base58ToAddress
+from ontology.interop.Ontology.Native import Invoke
+from ontology.builtins import state
+
+# contract address 
+contract_address_ONT = bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01')
+contract_address_ONG = bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02')
+
+def Main(operation, args):
+    if operation == 'transfer':
+        from_acct = args[0]
+        to_acct = args[1]
+        ont_amount = args[2]
+        ong_amount = args[3]
+        return transfer(from_acct,to_acct,ont_amount,ong_amount)
+    
+    return False
 
 
-**Download and open your compatible ONT client wallet**
-* Please get the new ONT wallet online
+def transfer(from_acct, to_acct, ont_amount, ong_amount):
+    # 将base58地址转换成 bytearray格式地址 
+    from_acct=Base58ToAddress(from_acct)
+    to_acct=Base58ToAddress(to_acct)
+    # 验签，调用方必须与转出地址为同一地址
+    if CheckWitness(from_acct):
+        # ONT转账
+        if ont_amount > 0:
+            param = state(from_acct, to_acct, ont_amount) # state函数用于封装转账相关参数
+            res = Invoke(1, contract_address_ONT, 'transfer', [param]) # invoke调用ONT token原生合约转账
+            if res and res == b'\x01':
+                Notify('transfer succeed')
+            else:
+                Notify('transfer failed')
+        # ONG转账，流程同上
+        if ong_amount > 0:
+            param = state(from_acct, to_acct, ong_amount)
+            res = Invoke(1, contract_address_ONG, 'transfer', [param])
+            if res and res == b'\x01':
+                Notify('transfer succeed')
+            else:
+                Notify('transfer failed')
+    else:
+        Notify('CheckWitness failed')
+```
 
-**4. Open your ONT wallet** 
-* Open your ONT client
-* Open your nano S ONT app, the screen should show "Wake Up, ONT..."
-* On your ONT client, click on "Login using the Ledger Nano S"
-* You can use you wallet as shown below.
+合约代码流程如下：
+1. 定义合约地址变量contract_address_ONT，contract_address_ONG
+2. 将转出地址，转入地址从base58格式转成bytearray格式
+3. 验签，确认转出地址与合约调用地址为同一地址
+4. state函数封装转账相关参数
+5. invoke调用ONT token原生合约转账，参数分别为版本号，合约地址，调用的合约方法，state封装的转账相关参数
+6. 通过返回res判断转账是否成功，b'\x01'为成功，成功输出“transfer succeed”。
 
-![11.png](https://upload-images.jianshu.io/upload_images/150344-3f39dd200c1d9efd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+### smartx实践
 
-![12.png](https://upload-images.jianshu.io/upload_images/150344-db49cd024e190267.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+1. 编译合约
+![compile](https://upload-images.jianshu.io/upload_images/150344-73b29d22dc20bd99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-**5. HOW DOES IT WORK ON THE LEDGER DEVICE**
-You can find your public key in your ONT wallet and can send ONT and ONG to that address.
-Once you have ONT or ONG, you can send it out using the "send" button.
-**Both these functions require you to click the buttons on the ledger device to authorize the transaction.**              
-* Click both buttons on the ledger device to sign a transaction :
+2. 部署合约
+如需申请测试币，申请地址为[https://developer.ont.io/applyOng](https://developer.ont.io/applyOng)
 
-![WechatIMG104.jpeg](https://upload-images.jianshu.io/upload_images/150344-d978675f70c97a25.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![deploy](https://upload-images.jianshu.io/upload_images/150344-56168736d87d248e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-* To deny the transaction, click single buttons to navigate to the "Deny TX" screen, then click both buttons at the same time to deny the transaction.
+3. 执行转账
 
-![WechatIMG105.jpeg](https://upload-images.jianshu.io/upload_images/150344-4f9bd4e25b9d1d45.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+转账参数设置
+![transfer](https://upload-images.jianshu.io/upload_images/150344-5c17e4bce9529dfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-**6. Contact Info**
-Xiao Min: xiaomin@onchain.com
+转账成功
+![Screen Shot 2019-09-11 at 5.16.06 PM.png](https://upload-images.jianshu.io/upload_images/150344-e850cfa96ed8b2d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+## 5. 本期问答
+
+合约转账时，若想转2个ONT和3.12个ONG，转账数量参数分别为：
+A. 2，3120000000
+B. 2000000000， 3.12
+C. 200， 312
+D. 2， 312
+
+
+
