@@ -32,14 +32,14 @@ from ontology.interop.System.Contract import Destroy
 from ontology.interop.System.Runtime import Notify
 
 def Main(operation, args):
-if operation == "destroy_contract":
-return destroy_contract()
-return False
+    if operation == "destroy_contract":
+        return destroy_contract()
+    return False
 
 def destroy_contract():
-Destroy() # 调用destroy 销毁此合约
-Notify(["The contract has been destoryed"])
-return True
+    Destroy() # 调用destroy 销毁此合约
+    Notify(["The contract has been destoryed"])
+    return True
 ```
 
 #### SmartX示例
@@ -82,29 +82,29 @@ from ontology.interop.System.Runtime import Notify
 from ontology.libont import AddressFromVmCode
 
 def Main(operation, args):
-if operation == "migrate_contract":
-if len(args) != 7:
-return False
-avm_code = args[0]
-need_storage = args[1]
-name = args[2]
-version = args[3]
-author = args[4]
-email = args[5]
-description = args[6]
-return migrate_contract(avm_code, need_storage, name, version, author, email, description)
+    if operation == "migrate_contract":
+        if len(args) != 7:
+            return False
+        avm_code = args[0]
+        need_storage = args[1]
+        name = args[2]
+        version = args[3]
+        author = args[4]
+        email = args[5]
+        description = args[6]
+        return migrate_contract(avm_code, need_storage, name, version, author, email, description)
 
-return False
+    return False
 
 def migrate_contract(avm_code, need_storage, name, version, author, email, description):
-res = Migrate(avm_code, need_storage, name, version, author, email, description) # 调用Migrate 迁移此合约
-if res:
-Notify(["Migrate successfully"])
-new_contract_hash=AddressFromVmCode(avm_code) # 计算新合约地址
-Notify(new_contract_hash) # 打印出新合约地址
-return True
-else:
-return False
+    res = Migrate(avm_code, need_storage, name, version, author, email, description) # 调用Migrate 迁移此合约
+    if res:
+        Notify(["Migrate successfully"])
+        new_contract_hash=AddressFromVmCode(avm_code) # 计算新合约地址
+        Notify(new_contract_hash) # 打印出新合约地址
+        return True
+    else:
+        return False
 ```
 
 #### SmartX示例
@@ -128,7 +128,6 @@ A. 合约资产，合约数据
 B. 合约数据，合约资产 
 C. 合约中的币，合约代码
 D. 合约数据，合约代码
-
 
 
 
