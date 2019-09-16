@@ -115,7 +115,9 @@ def migrate_contract(avm_code, need_storage, name, version, author, email, descr
 
 ![Screen Shot 2019-09-16 at 11.30.00 AM.png](https://upload-images.jianshu.io/upload_images/150344-0258fcd288ce3ff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-2. 部署成功后，可以从控制台拿到新的合约哈希。
+2. 部署成功后，可以从控制台拿到新的合约哈希。be4606c4663081b70f745ed9fc64d4c3b0d9c183 为新合约哈希。
+
+![Screen Shot 2019-09-16 at 11.55.20 AM.png](https://upload-images.jianshu.io/upload_images/150344-c056edae8ce3bc05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 更详细的操作步骤请见视频。
